@@ -32,7 +32,7 @@ export class ModalPage implements OnInit {
   }
 
   onCalification(e) {
-    this.calification = parseInt(e.target.value);
+    this.calification = e.target.value;
     console.log(this.calification);
   }
 
