@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { ModalPage } from '../modal/modal.page';
 import { Book } from './models/Book';
 import { BookService } from './services/book.service';
 
@@ -8,7 +10,10 @@ import { BookService } from './services/book.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  constructor(private bookService: BookService) {}
+  constructor(
+    private bookService: BookService,
+    private modalController: ModalController
+  ) {}
 
   allBooks: Book[] = [];
   loading: boolean = true;
@@ -16,6 +21,17 @@ export class HomePage implements OnInit {
 
   ngOnInit(): void {
     this.getBooks();
+  }
+
+  async viewBook(book: Book) {
+    console.log(book);
+    const modal = await this.modalController.create({
+      component: ModalPage,
+      componentProps: {
+        book,
+      },
+    });
+    return await modal.present();
   }
 
   getBooks() {

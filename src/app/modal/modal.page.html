@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-row class="ion-align-items-center ion-justify-content-between">
+      <ion-col size="11">
+        <ion-title>{{book.title}}</ion-title>
+      </ion-col>
+      <ion-col size="1">
+        <ion-icon name="close-circle" (click)="onClose()"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col size="6">
+        <ion-thumbnail>
+          <img src="{{book.url}}" />
+        </ion-thumbnail>
+      </ion-col>
+      <ion-col size="6" class="ion-padding">
+        <ion-label>{{book.description}}</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col>
+        <ion-row class="ion-align-items-center ion-justify-content-center">
+          <ion-col>
+            <ion-input
+              placeholder="add a review"
+              (ionChange)="onReview($event)"
+              [ngModel]="review"
+            ></ion-input>
+          </ion-col>
+          <ion-col>
+            <ion-select
+              interface="popover"
+              placeholder="add rating"
+              (ionChange)="onCalification($event)"
+              [ngModel]="calification"
+            >
+              <ion-select-option value="1">1</ion-select-option>
+              <ion-select-option value="2">2</ion-select-option>
+              <ion-select-option value="3">3</ion-select-option>
+              <ion-select-option value="4">4</ion-select-option>
+              <ion-select-option value="5">5</ion-select-option>
+            </ion-select>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-button
+              *ngIf="review.length > 0 && calification != 0"
+              size="small"
+              color="primary"
+              (click)="addReview()"
+              >add</ion-button
+            >
+          </ion-col>
+        </ion-row>
+
+        <ion-title *ngIf="book.reviews.length == 0"
+          >there are no comments</ion-title
+        >
+        <ion-list *ngIf="book.reviews.length > 0">
+          <ion-item *ngFor="let review of book.reviews">
+            <ion-avatar slot="start">
+              <img src="https://avatars.dicebear.com/api/avataaars/.svg" />
+            </ion-avatar>
+            <ion-label>
+              <h2>{{review.comment}}</h2>
+              <h3>{{review.calification}}</h3>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

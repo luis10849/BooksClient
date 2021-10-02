@@ -63,7 +63,7 @@
       <ion-row class="ion-align-items-center ion-justify-content-center">
         <ion-list>
           <ion-item *ngFor="let book of allBooks">
-            <ion-avatar slot="start">
+            <ion-avatar slot="start" (click)="viewBook(book)">
               <img src="{{book.url}}" />
             </ion-avatar>
             <ion-label>
