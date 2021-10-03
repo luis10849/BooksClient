@@ -1,58 +1,14 @@
 <ion-content [fullscreen]="true" class="ion-padding-horizontal">
   <ion-grid>
     <ion-row class="ion-align-items-center ion-justify-content-center">
-      <ion-col size="3">
-        <ion-searchbar placeholder="Search" [value]="searchTerm" (ionChange)="onSimpleSearch($event)">
+      <ion-col size="12">
+        <ion-searchbar
+          placeholder="Search"
+          [value]="searchTerm"
+          (ionChange)="onSimpleSearch($event)"
+        >
         </ion-searchbar>
       </ion-col>
-      <ion-col size="1">
-        <ion-row class="ion-align-items-center ion-justify-content-center">
-          <ion-toggle color="primary"></ion-toggle>
-        </ion-row>
-        <ion-row class="ion-align-items-center ion-justify-content-center">
-          <ion-label>Author</ion-label>
-        </ion-row>
-      </ion-col>
-      <ion-col size="1">
-        <ion-row class="ion-align-items-center ion-justify-content-center">
-          <ion-toggle color="primary"></ion-toggle>
-        </ion-row>
-        <ion-row class="ion-align-items-center ion-justify-content-center">
-          <ion-label>ISBN</ion-label>
-        </ion-row>
-      </ion-col>
-      <ion-col size="1">
-        <ion-row class="ion-align-items-center ion-justify-content-center">
-          <ion-toggle color="primary"></ion-toggle>
-        </ion-row>
-        <ion-row class="ion-align-items-center ion-justify-content-center">
-          <ion-label>Title</ion-label>
-        </ion-row>
-      </ion-col>
-      <!-- <ion-col size="3">
-        <ion-list>
-          <ion-radio-group value="biff">
-            <ion-list-header>
-              <ion-label>Filter</ion-label>
-            </ion-list-header>
-
-            <ion-item>
-              <ion-label>Author</ion-label>
-              <ion-radio slot="start" value="biff"></ion-radio>
-            </ion-item>
-
-            <ion-item>
-              <ion-label>ISBN</ion-label>
-              <ion-radio slot="start" value="griff"></ion-radio>
-            </ion-item>
-
-            <ion-item>
-              <ion-label>Title</ion-label>
-              <ion-radio slot="start" value="buford"></ion-radio>
-            </ion-item>
-          </ion-radio-group>
-        </ion-list>
-      </ion-col> -->
     </ion-row>
 
     <ng-template [ngIf]="loading" [ngIfElse]="list">
@@ -60,20 +16,28 @@
     </ng-template>
 
     <ng-template #list>
-      <ion-row class="ion-align-items-center ion-justify-content-center">
-        <ion-list>
-          <ion-item *ngFor="let book of allBooks">
-            <ion-avatar slot="start" (click)="viewBook(book)">
-              <img src="{{book.url}}" />
-            </ion-avatar>
-            <ion-label>
-              <h2>Title : {{book.title}}</h2>
-              <h3>ISBN: {{book.isbn}}</h3>
-              <p>Author: {{book.author.name}}</p>
-            </ion-label>
-          </ion-item>
-        </ion-list>
-      </ion-row>
+      <ion-grid>
+        <ion-row>
+          <ion-col
+            *ngFor="let book of allBooks"
+            size-lg="6"
+            size-md="6"
+            size-sm="6"
+            size="12"
+          >
+            <ion-item>
+              <ion-avatar slot="start" (click)="viewBook(book)">
+                <img src="{{book.url}}" />
+              </ion-avatar>
+              <ion-label>
+                <h2>Title : {{book.title}}</h2>
+                <h3>ISBN: {{book.isbn}}</h3>
+                <p>Author: {{book.author.name}}</p>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ng-template>
   </ion-grid>
 </ion-content>
